@@ -1,9 +1,9 @@
-%include backpack/std/std
+%include backpack/bezier/bezier
 
 costumes "blank.svg";
 
 onflag {
-    SPLIT("a,b,c", ",");
+    split "a,b,c", ",";
     # forever{
     #     Bezier2 b = Bezier2{
     #         x0: -100, y0: -100,
