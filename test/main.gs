@@ -1,15 +1,27 @@
 %include backpack/bezier/bezier
-
 costumes "blank.svg";
 
 onflag {
-    split "a,b,c", ",";
-    # forever{
-    #     Bezier2 b = Bezier2{
-    #         x0: -100, y0: -100,
-    #         x1: 100, y1: -50,
-    #         x2: mouse_x(), y2: mouse_y()
-    #     };
-    #     # bezier2_draw b, 100;
-    # }
+    forever{
+        tick;
+    }
+}
+
+proc tick{
+    erase_all;
+
+    delete de_casteljau_pts;
+    
+    add Node{x: -100, y: -100} to de_casteljau_pts;
+    add Node{x: 100, y: -50} to de_casteljau_pts;
+    add Node{x: mouse_x(), y: mouse_y()} to de_casteljau_pts;
+    add Node{x: -100, y: 100} to de_casteljau_pts;
+    
+    local t = 0;
+    repeat 101 {
+        node_goto get_casteljau(t);
+        pen_down;
+        t += 0.01;
+    }
+    pen_up;
 }
